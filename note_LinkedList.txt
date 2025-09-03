@@ -1,0 +1,15 @@
+ A linked list is a fundamental data structure in computer science. It mainly allows efficient insertion and deletion operation comapred to arrays. Like arrays, it is also used to implement other data structures like stack, queue and deque.
+
+Comaprison with Array
+
+ Linked List:
+ 	> Data Structure : Non-contiquous
+	> Memory Allocation : Typically allocated one by one to individual elements
+	> Insertion/Deletion : Efficient
+	> Access : Sequential
+
+Array :
+	> Data Structure : Contiguous
+	> Memory allocation : Typically allocated to the whoe array
+	> Insertion/Deletion : Inefficient
+	> Access : Random
