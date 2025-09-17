@@ -11,27 +11,67 @@ class Node {
 
 class LinkedList {
   Node* head;
+  int size = 0;
 
  public:
   LinkedList() { head = NULL; }
 
   // Add node at begining
-  void prependNode(int data){
+  void prependNode(int data) {
+    Node* newNode = new Node(data);
 
-	Node* newNode = new Node(data);
+    if (head == NULL) {
+      head = newNode;
+      size++;
+      return;
+    }
 
-	if(head == NULL){
-		head = newNode;
-		return;
-	}
+    newNode->next = head;
+    head = newNode;
+    size++;
+  }
 
-	newNode->next = head;
-	head =  newNode;
+  // Add node at end
+  void appendNode(int data) {
+    Node* current = head;
+    Node* newNode = new Node(data);
+
+    while (current->next) {
+      current = current->next;
+    }
+
+    current->next = newNode;
+    size++;
+  }
+
+  // Insert at given position
+  void insertNode(int position, int data){
+    Node* newNode = new Node(data);
+
+    if(position < 1 || position > size){
+      cout << position << " is invalid position. enter valid position to insert " << data << endl;
+      return;
+    }
+
+    if(position == 1){
+      prependNode(data);
+      return;
+    }
+
+    Node* current = head;
+    int count = 2;
+
+    while(count < position){
+      current = current->next;
+      count++;
+    }
+    newNode->next = current->next;
+    current->next = newNode;
+    size++;
 
   }
 
-  void appendNode(int data);             // Add node at end []
-  void insertNode(int index, int data);  // Insert at given index []
+
   void findNode(int data);               // Find by value
   void getNode(int index);               // Get by index
   void deleteNode();                     // Delete last node
@@ -52,14 +92,15 @@ class LinkedList {
 };
 
 // we can write like this with scope resolution operator (::)
-void LinkedList::print(){
-	Node* temp = head;
+void LinkedList::print() {
+  Node* temp = head;
 
-	while(temp != NULL){
-		cout << temp->data << " -> ";
-		temp = temp -> next;
-	}
-	cout << endl;
+  while (temp != NULL) {
+    cout << temp->data << " -> ";
+    temp = temp->next;
+  }
+  cout << endl;
+  cout << "size : " << size << endl;
 }
 
 // main function
@@ -70,6 +111,8 @@ int main() {
   list.prependNode(20);
   list.prependNode(30);
   list.prependNode(40);
+  list.appendNode(100);
+  list.insertNode(6,510);
   list.print();
 
   return 0;
