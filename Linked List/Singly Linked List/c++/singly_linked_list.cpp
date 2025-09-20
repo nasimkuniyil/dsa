@@ -45,15 +45,17 @@ class LinkedList {
   }
 
   // Insert at given position
-  void insertNode(int position, int data){
+  void insertNode(int position, int data) {
     Node* newNode = new Node(data);
 
-    if(position < 1 || position > size){
-      cout << position << " is invalid position. enter valid position to insert " << data << endl;
+    if (position < 1 || position > size) {
+      cout << position
+           << " is invalid position. enter valid position to insert " << data
+           << endl;
       return;
     }
 
-    if(position == 1){
+    if (position == 1) {
       prependNode(data);
       return;
     }
@@ -61,22 +63,37 @@ class LinkedList {
     Node* current = head;
     int count = 2;
 
-    while(count < position){
+    while (count < position) {
       current = current->next;
       count++;
     }
     newNode->next = current->next;
     current->next = newNode;
     size++;
-
   }
 
+  // Delete last node
+  void deleteNode() {
+    if (!head) {
+      cout << "list is empty" << endl;
+      return;
+    }
 
-  void findNode(int data);               // Find by value
-  void getNode(int index);               // Get by index
-  void deleteNode();                     // Delete last node
-  void deleteNodeAt(int index);          // Delete at index
-  void print();                          // Print all nodes [X]
+    Node* current = head;
+    Node* prev = nullptr;
+    while (current->next) {
+      prev = current;
+      current=current->next;
+    }
+    prev->next = nullptr;
+    delete current;
+  }
+
+  void findNode(int data);  // Find by value
+  void getNode(int index);  // Get by index
+
+  void deleteNodeAt(int index);  // Delete at index
+  void print();                  // Print all nodes [X]
 
   // ===== Extra common methods =====
   int length();                   // Return number of nodes
@@ -112,7 +129,9 @@ int main() {
   list.prependNode(30);
   list.prependNode(40);
   list.appendNode(100);
-  list.insertNode(6,510);
+  list.insertNode(6, 510);
+  list.print();
+  list.deleteNode();
   list.print();
 
   return 0;
