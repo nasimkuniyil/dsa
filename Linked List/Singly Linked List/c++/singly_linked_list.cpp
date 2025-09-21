@@ -83,12 +83,27 @@ class LinkedList {
     Node* prev = nullptr;
     while (current->next) {
       prev = current;
-      current=current->next;
+      current = current->next;
     }
     prev->next = nullptr;
     delete current;
   }
 
+ private:
+  void remove(Node* node) {
+    if (node) {
+      remove(node->next);
+      delete node;
+    }
+  }
+
+ public:
+  // Delete all nodes
+  void clear() {
+    remove(head);
+    head = nullptr;
+    size = 0;
+  }
   void findNode(int data);  // Find by value
   void getNode(int index);  // Get by index
 
@@ -98,7 +113,6 @@ class LinkedList {
   // ===== Extra common methods =====
   int length();                   // Return number of nodes
   bool isEmpty();                 // Check if list is empty
-  void clear();                   // Delete all nodes
   void reverse();                 // Reverse the list
   void removeDuplicates();        // Remove duplicate values
   void sort();                    // Sort list in ascending order
@@ -112,6 +126,7 @@ class LinkedList {
 void LinkedList::print() {
   Node* temp = head;
 
+  cout << "linked list items : " << endl;
   while (temp != NULL) {
     cout << temp->data << " -> ";
     temp = temp->next;
@@ -132,6 +147,8 @@ int main() {
   list.insertNode(6, 510);
   list.print();
   list.deleteNode();
+  list.print();
+  list.clear();
   list.print();
 
   return 0;
