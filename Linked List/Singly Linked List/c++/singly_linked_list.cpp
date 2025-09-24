@@ -104,7 +104,29 @@ class LinkedList {
     head = nullptr;
     size = 0;
   }
-  void findNode(int data);  // Find by value
+
+  // Find by value
+  void findNode(int data){
+    if(!head){
+      return;
+    }
+    if(head->data == data){
+      cout << "data found at 0 th index" << endl;
+      return;
+    }
+    Node* current = head->next;
+    int index = 1;
+    while(current){
+      if(current->data==data){
+        cout << "data found at " << index << "th index" << endl;
+        return;
+      }
+      index++;
+      current = current->next;
+    }
+    cout << data << "is not found" << endl;
+  }
+
   void getNode(int index);  // Get by index
 
   void deleteNodeAt(int index);  // Delete at index
@@ -144,12 +166,13 @@ int main() {
   list.prependNode(30);
   list.prependNode(40);
   list.appendNode(100);
-  list.insertNode(6, 510);
+  list.insertNode(3, 510);
   list.print();
   list.deleteNode();
   list.print();
-  list.clear();
+  // list.clear();
   list.print();
+  list.findNode(100);
 
   return 0;
 }
